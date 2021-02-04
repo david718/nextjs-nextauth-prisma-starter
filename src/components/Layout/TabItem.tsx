@@ -20,7 +20,7 @@ type TabItemProps = {
 const TabItem = ({ name, href }: TabItemProps) => {
     const router = useRouter();
 
-    const naviPageList = ['home'];
+    const naviPageList = ['home', 'service', 'achivement'];
     let isSelected: boolean = router.pathname.split('/')[1] === href.split('/')[1];
     if (!naviPageList.includes(router.pathname.split('/')[1])) {
         isSelected = 'more' === href.split('/')[1];
