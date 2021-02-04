@@ -5,7 +5,7 @@ const options = {
     providers: [
         {
             id: 'kakao',
-            name: '카카오톡',
+            name: 'Kakaotalk',
             type: 'oauth',
             version: '2.0',
             scope: 'account_email profile',
@@ -49,11 +49,8 @@ const options = {
         },
         session: async (session: any, user: any) => {
             try {
-                console.log(session, '@@@@');
-                return Promise.resolve({
-                    ...session,
-                    user: { ...exitedUser, image: user.picture },
-                });
+                console.log(session, user, '@@@@');
+                return Promise.resolve(session);
             } catch (e) {
                 console.log(e);
                 return Promise.reject(true);

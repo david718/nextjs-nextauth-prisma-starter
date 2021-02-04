@@ -8,20 +8,20 @@ export default function SignIn({
     providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const handleLogin = (id: string) => async () => {
-        await signIn(id, { callbackUrl: 'http://localhost:3000' });
+        await signIn(id, { callbackUrl: 'http://localhost:3000/home' });
     };
 
     return (
         <>
             <div className="flex-center padding-top-200">
-                <SPageTitle>로그인 페이지</SPageTitle>
+                <SPageTitle>Sign in page</SPageTitle>
             </div>
             <div className="flex-center margin-top-16">
                 {Object.values(providers).map((provider: any) => {
                     return (
                         <div key={provider.name} className="margin-top-16">
                             <SLoginButton onClick={handleLogin(provider.id)}>
-                                {provider.name}으로 시작하기
+                                {provider.name} Sign in
                             </SLoginButton>
                         </div>
                     );
