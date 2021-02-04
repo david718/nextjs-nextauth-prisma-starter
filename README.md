@@ -21,14 +21,14 @@ Start with this boilerplate to make your own nextjs app(Docker image)
 -   DATABASE_URL=
 -   JWT_SECRET_KEY=`yourOwnSecretKey`
 -   KAKAO_REST_KEY=
--   KAKAO_REDIRECT_URI=
+-   KAKAO_REDIRECT_URI=`http://localhost:3000/api/auth/callback/kakao`
 
 ## Get started
 
 1. create kakao app and use kakao login(https://developers.kakao.com/)
-    - please check **profile** and **email** in agreement items
-    - input `http://localhost:3000/api/auth/callback/kakao` to redirect_uri
     - get `kakao login rest key`
+    - input `http://localhost:3000/api/auth/callback/kakao` to redirect_uri
+    - please change status of **profile** and **email** in agreement items(scope)
 2. edit .env
     - ...
     - KAKAO_REST_KEY=`kakao login rest key`
