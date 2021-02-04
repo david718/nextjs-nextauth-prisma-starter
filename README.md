@@ -6,11 +6,12 @@ Start with this boilerplate to make your own nextjs app(Docker image)
 -   less
 -   antd
 -   axios
+-   serviceWorker(public/sw.js)
 
 ## Prerequisites
 
-1. git clone git@github.com:david718/Nextjs-Prisma-NextAuth-KakaoLogin-boilerplate.git
-2. cd Nextjs-Prisma-NextAuth-KakaoLogin-boilerplate
+1. git clone git@github.com:david718/nextjs-nextauth-prisma-starter.git
+2. cd nextjs-nextauth-prisma-starter
 3. yarn install
 4. touch .env
 
