@@ -1,8 +1,9 @@
 import { memo, useState } from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 import { useSession, signOut } from 'next-auth/client';
 import { Button, Badge, Popover, Avatar } from 'antd';
-import { BellOutlined, LogoutOutlined } from '@ant-design/icons';
+import { BellOutlined, LogoutOutlined, LeftOutlined } from '@ant-design/icons';
 import stc from 'string-to-color';
 
 type PopoverItemProps = {
@@ -36,6 +37,9 @@ const Header = memo(({ datas }: HeaderProps) => {
     const handleLogout = async () => {
         console.log(loading, 'log out!');
         await signOut({ callbackUrl: process.env.NEXTAUTH_URL + '/signin' });
+    };
+    const handleGoBack = () => {
+        Router.back();
     };
 
     const notiContent = (
@@ -73,6 +77,7 @@ const Header = memo(({ datas }: HeaderProps) => {
 
     return (
         <div className="header-contrainer">
+            <Button type="text" icon={<LeftOutlined />} onClick={handleGoBack} />
             <div>
                 <Button
                     className="margin-right-8"
