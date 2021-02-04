@@ -50,3 +50,9 @@ Start with this boilerplate to make your own nextjs app(Docker image)
 5. npx prisma introspect
 6. yarn add @prisma/client
 7. npx prisma generate
+
+## Dockerizing
+
+1. docker build -t `dockerId`/`imageName`:`version` (ex `hkc718/everyday-bible:1.0`) .
+2. docker images
+3. you can verify your docker image
