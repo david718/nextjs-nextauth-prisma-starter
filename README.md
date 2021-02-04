@@ -2,12 +2,10 @@
 
 Start with this boilerplate to make your own nextjs app(Docker image)
 
--   Docker
--   styled-component
--   less
+-   styled-component, less
 -   antd
--   axios
 -   serviceWorker(public/sw.js)
+-   Dockerfile
 
 ## Prerequisites
 
