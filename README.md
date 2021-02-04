@@ -1,4 +1,4 @@
-# Nextjs-NextAuth-Prisma-KakaoLogin-boilerplate
+# Nextjs-NextAuth-Prisma-starter
 
 Start with this boilerplate to make your own nextjs app(Docker image)
 
@@ -34,6 +34,8 @@ Start with this boilerplate to make your own nextjs app(Docker image)
     - KAKAO_REST_KEY=`kakao login rest key`
     - KAKAO_REDIRECT_URI=`http://localhost:3000/api/auth/callback/kakao`
 3. yarn dev
+
+-   add additional(google or facebook login) with `.env` and `api/auth/[...nextauth].ts` in [nextauth](https://next-auth.js.org/)
 
 ## Connect database
 
