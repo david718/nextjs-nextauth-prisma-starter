@@ -25,6 +25,8 @@ Start with this boilerplate to make your own nextjs app(Docker image)
 
 ## Get started
 
+https://hkc7180.medium.com/nextjs-with-kakaotalk-oauth-2-0-login-dc27aa3b6c33
+
 1. create kakao app and use kakao login(https://developers.kakao.com/)
     - get `kakao login rest key`
     - input `http://localhost:3000/api/auth/callback/kakao` to redirect_uri
