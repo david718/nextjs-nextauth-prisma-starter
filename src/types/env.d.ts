@@ -4,7 +4,6 @@ declare global {
             DATABASE_URL: string;
             NEXTAUTH_URL: string;
             NEXT_PUBLIC_API_SERVER_URL: string;
-            JWT_SECRET_KEY: string;
             GOOGLE_ID: string;
             GOOGLE_SECRET: string;
             FACEBOOK_ID: string;

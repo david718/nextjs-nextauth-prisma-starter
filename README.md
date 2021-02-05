@@ -19,7 +19,6 @@ Start with this boilerplate to make your own nextjs app(Docker image)
 -   NEXTAUTH_URL=
 -   NEXT_PUBLIC_API_SERVER_URL=`http://localhost:3000/api`
 -   DATABASE_URL=
--   JWT_SECRET_KEY=`yourOwnSecretKey`
 -   KAKAO_REST_KEY=
 -   KAKAO_REDIRECT_URI=`http://localhost:3000/api/auth/callback/kakao`
 
@@ -45,7 +44,6 @@ https://hkc7180.medium.com/nextjs-with-kakaotalk-oauth-2-0-login-dc27aa3b6c33
 2. edit .env
     - ...
     - DATABASE_URL=
-    - JWT_SECRET_KEY=
     - ...
 3. npx prisma init
 4. create user table with **cli**(db direct connect!)

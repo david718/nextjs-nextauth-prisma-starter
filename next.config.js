@@ -12,7 +12,6 @@ const themeVariables = lessToJS(
 module.exports = withLess({
     env: {
         NEXT_PUBLIC_API_SERVER_URL: process.env.NEXT_PUBLIC_API_SERVER_URL,
-        JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
     },
     lessLoaderOptions: {
         javascriptEnabled: true,
