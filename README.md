@@ -2,7 +2,7 @@
 
 Start with this boilerplate to make your own nextjs app(Docker image)
 
--   styled-component, less
+-   styled-component
 -   antd
 -   serviceWorker(public/sw.js)
 -   Dockerfile
@@ -24,9 +24,9 @@ Start with this boilerplate to make your own nextjs app(Docker image)
 
 ## Get started
 
-https://hkc7180.medium.com/nextjs-with-kakaotalk-oauth-2-0-login-dc27aa3b6c33
+[kakao-login with next-auth(medium posts)](https://hkc7180.medium.com/nextjs-with-kakaotalk-oauth-2-0-login-dc27aa3b6c33)
 
-1. create kakao app and use kakao login(https://developers.kakao.com/)
+1. create kakao app and use kakao login[kakao developer site](https://developers.kakao.com/)
     - get `kakao login rest key`
     - input `http://localhost:3000/api/auth/callback/kakao` to redirect_uri
     - please change status of **profile** and **email** in agreement items(scope)
@@ -40,19 +40,21 @@ https://hkc7180.medium.com/nextjs-with-kakaotalk-oauth-2-0-login-dc27aa3b6c33
 
 ## Connect database
 
-1. create database and get database url
-2. edit .env
+[connect db with prisma](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-postgres)
+
+1. create database and get `database url`
+2. npx prisma init
+3. edit .env
     - ...
-    - DATABASE_URL=
+    - DATABASE_URL={`database url`}
     - ...
-3. npx prisma init
-4. create user table with **cli**(db direct connect!)
-5. npx prisma introspect
+4. create user table with **cli**(You have to directly connect with DB!, cannot make any tables with prisma CLI or API)
+5. npx prisma db pull
 6. yarn add @prisma/client
 7. npx prisma generate
 
 ## Dockerizing
 
-1. docker build -t `dockerId`/`imageName`:`version` (ex `hkc718/everyday-bible:1.0`) .
+1. docker build -t `{dockerId}/{imageName}:{version}` (ex `hkc718/everyday-bible:1.0`)
 2. docker images
-3. you can verify your docker image
+    - you can verify your docker image

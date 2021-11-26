@@ -1,19 +1,34 @@
-import { NextPage, GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/client';
+import {
+    NextPage,
+    GetServerSideProps,
+    InferGetServerSidePropsType,
+} from 'next';
+import { getSession, signOut } from 'next-auth/react';
 
-const Page: NextPage = () => {
-    return <>NOT FOUND</>;
+import { Button } from 'src/components/Atoms';
+
+const Page: NextPage = ({
+    user,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const handleLogout = async () => {
+        await signOut();
+    };
+    return (
+        <div>
+            <div>Hello {user.name}</div>
+            <div>
+                <Button onClick={handleLogout}>LOG OUT</Button>
+            </div>
+        </div>
+    );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     const session: any = await getSession({ req });
-
+    console.log(session);
     if (session) {
         return {
-            redirect: {
-                destination: '/home',
-                permanent: true,
-            },
+            props: { user: session.user },
         };
     } else {
         return {

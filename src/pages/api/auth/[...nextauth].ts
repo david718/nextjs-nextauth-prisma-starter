@@ -1,56 +1,50 @@
+import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+
+const prisma = new PrismaClient();
 
 const options = {
+    secret: 'secret',
     providers: [
-        {
-            id: 'kakao',
-            name: 'Kakaotalk',
-            type: 'oauth',
-            version: '2.0',
-            scope: 'account_email profile',
-            params: { grant_type: 'authorization_code' },
-            accessTokenUrl: 'https://kauth.kakao.com/oauth/token',
-            authorizationUrl: 'https://kauth.kakao.com/oauth/authorize?response_type=code',
-            profileUrl: 'https://kapi.kakao.com/v2/user/me',
-            clientId: process.env.KAKAO_REST_KEY,
-            profile: (profile: any) => {
-                return {
-                    id: profile.id,
-                    name: profile.properties.nickname,
-                    email: profile.kakao_account.email,
-                    image: profile.properties.profile_image,
-                };
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+            authorization: {
+                params: {
+                    prompt: 'consent',
+                    access_type: 'offline',
+                    response_type: 'code',
+                },
             },
-        },
-        // Providers.Facebook({
-        //     clientId: process.env.FACEBOOK_ID,
-        //     clientSecret: process.env.FACEBOOK_SECRET,
-        // }),
-        // Providers.Google({
-        //     clientId: process.env.GOOGLE_ID,
-        //     clientSecret: process.env.GOOGLE_SECRET,
-        //     authorizationUrl:
-        //         'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
-        // }),
+        }),
     ],
     pages: {
         signIn: '/signin',
     },
     callbacks: {
-        signIn: async (user: any, account: any, profile: any) => {
+        signIn: async ({ user, account, profile }: any) => {
             console.log(user, account, profile, 'try signin');
+
             try {
-                return Promise.resolve(true);
-            } catch (e) {
-                console.log(e);
-                return Promise.reject(true);
-            }
-        },
-        session: async (session: any, user: any) => {
-            try {
-                console.log(session, user, '@@@@');
-                return Promise.resolve(session);
+                const exitedUser = await prisma.user.findUnique({
+                    where: { email: user.email },
+                });
+                if (exitedUser) {
+                    console.log(exitedUser, 'get user');
+                    return Promise.resolve(true);
+                } else {
+                    console.log('create###', user.name, user.email);
+                    const createdUser = await prisma.user.create({
+                        data: {
+                            name: user.name,
+                            email: user.email,
+                        },
+                    });
+                    console.log(createdUser, 'created user!');
+                    return Promise.resolve(true);
+                }
             } catch (e) {
                 console.log(e);
                 return Promise.reject(true);
@@ -59,4 +53,5 @@ const options = {
     },
 };
 
-export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
+export default (req: NextApiRequest, res: NextApiResponse) =>
+    NextAuth(req, res, options);

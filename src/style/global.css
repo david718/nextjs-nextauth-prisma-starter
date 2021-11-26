@@ -1,0 +1,22 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#__next {
+    height: 100%;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+.margin-top-16 {
+    margin-top: 16px;
+}
+.margin-right-8 {
+    margin-right: 8px;
+}
+.padding-top-200 {
+    padding-top: 200px;
+}

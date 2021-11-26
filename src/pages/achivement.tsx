@@ -1,7 +1,13 @@
-import { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from 'next-auth/client';
+import {
+    NextPage,
+    GetServerSideProps,
+    InferGetServerSidePropsType,
+} from 'next';
+import { getSession } from 'next-auth/react';
 
-const Page: NextPage = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Page: NextPage = ({
+    user,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <div>
             <div>Achivement {user.email}</div>

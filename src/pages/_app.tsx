@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 
-import 'antd/dist/antd.less';
-import 'src/style/antd-custom.less';
-import 'src/style/global.less';
+import 'antd/dist/antd.css';
+import 'src/style/global.css';
 
 import { Layout } from 'src/components';
 
-const WrappedApp = ({ Component, pageProps }: AppProps) => {
-    const router = useRouter();
-
+const WrappedApp = ({
+    Component,
+    router,
+    pageProps: { session, ...pageProps },
+}: AppProps) => {
+    console.log(router);
     useEffect(() => {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -24,7 +25,10 @@ const WrappedApp = ({ Component, pageProps }: AppProps) => {
                         );
                     },
                     function (err) {
-                        console.log('Service Worker registration failed: ', err);
+                        console.log(
+                            'Service Worker registration failed: ',
+                            err
+                        );
                     }
                 );
             });
@@ -34,18 +38,13 @@ const WrappedApp = ({ Component, pageProps }: AppProps) => {
     return (
         <>
             <Head>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
-                />
-                <meta name="mobile-web-app-capable" content="yes" />
-                <link rel="shortcut icon" href="/static/favicon.ico" />
+                <link rel='shortcut icon' href='/static/favicon.ico' />
                 <script
                     async
-                    src="https://www.googletagmanager.com/gtag/js?id=G-P0Q0CKJBYM"
+                    src='https://www.googletagmanager.com/gtag/js?id=G-P0Q0CKJBYM'
                 ></script>
                 <script
-                    type="text/javascript"
+                    type='text/javascript'
                     dangerouslySetInnerHTML={{
                         __html: `window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
@@ -54,14 +53,14 @@ const WrappedApp = ({ Component, pageProps }: AppProps) => {
                     }}
                 />
             </Head>
-            {['/login', '/register', '/signin'].includes(router.pathname) ? (
+            {['/signin'].includes(router.pathname) ? (
                 <Component {...pageProps} />
             ) : (
-                <Provider session={pageProps.session}>
-                    <Layout>
+                <SessionProvider session={session}>
+                    <Layout pathname={router.pathname}>
                         <Component {...pageProps} />
                     </Layout>
-                </Provider>
+                </SessionProvider>
             )}
         </>
     );
